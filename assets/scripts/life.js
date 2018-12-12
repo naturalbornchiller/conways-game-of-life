@@ -1,7 +1,4 @@
 const configurations = require('./preconfigurations.js')
-const canvas = document.getElementById('c').getContext('2d')
-canvas.strokeStyle = '#e1e1e1'
-canvas.fillStyle = '#000'
 let cells = []
 let paused = true
 const isFilled = (x, y) => cells[x] && cells[x][y]
@@ -26,19 +23,14 @@ const preconfigure = setting => {
 }
 
 const draw = (width=1512, height=512) => {
-    canvas.clearRect(0, 0, width, height)
+    let HTML = ''
     cells.forEach((row, x) => {
         row.forEach((cell, y) => {
-            canvas.beginPath()
-            // makes a rectangle of size 8 at position (x*8, y*8)
-            canvas.rect(x*8, y*8, 8, 8)
-            if (cell) { // fills if cell
-                canvas.fill()
-            } else { // otherwise outline
-                canvas.stroke()
-            }
+            cell ? HTML += `<div id=[${x}][${y}] class="cell alive"></div>` : HTML += `<div id=[${x}][${y}] class="cell dead"></div>`
         })
     })
+    $('#frame').html(HTML)
+
     setTimeout(() => {
         $('#count').text(population(cells))
         console.log(paused)
@@ -76,9 +68,11 @@ const playGod = e => {
 $('#start').on('click', () => {
     if (paused) {
       paused = false
+      $('#start').css({color: 'blue'})
       update()
     } else {
       paused = true
+      $('#start').css({color: 'black'})
     }
 })
 
