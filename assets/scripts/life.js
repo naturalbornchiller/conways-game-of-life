@@ -14,6 +14,9 @@ const countNeighbors = (x, y) => {
 const preconfigure = setting => {
     let config
     switch (setting) {
+        case 1:
+            config = configurations.spiralFlower
+            break;
         // MAKE BLANK BOARD THE DEFAULT
         default: // gosper glider gun
             config = configurations.glosperGlider
@@ -72,6 +75,7 @@ $('#start').on('click', () => {
 // Reset game
 $('#reset').on('click', () => {
     paused = true
+    $('#start').css({color: 'black'})
     init(64, 64, 1)
 })
 // Play god
