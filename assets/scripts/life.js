@@ -3,6 +3,7 @@ const canvas = document.getElementById('c').getContext('2d')
 canvas.strokeStyle = '#e1e1e1'
 canvas.fillStyle = '#000'
 let cells = []
+let paused = false
 const isFilled = (x, y) => cells[x] && cells[x][y]
 const liveCount = cells => cells.flat().filter(cell => cell === true).length
 const population = cells => cells.length < 10 ? liveCount(cells) : '~' + +(Math.ceil(liveCount(cells) / 50.0) * 50)
@@ -40,6 +41,7 @@ const draw = (width=1512, height=512) => {
     })
     setTimeout(() => {
         $('#count').text(population(cells))
+        // if (!paused) 
         update()
     }, 200)
 }

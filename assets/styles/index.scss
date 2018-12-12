@@ -9,6 +9,15 @@
     }
 }
 
+#start, #reset{
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+#reset{
+    cursor: pointer;
+    margin-right: 5px;
+}
 
 #tooltip {
     position: relative;
