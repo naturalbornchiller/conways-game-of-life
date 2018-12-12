@@ -3,5 +3,5 @@
 const init = require('./life.js')
 
 $(() => {
-  init()
+  init(64, 64, 1)
 })
