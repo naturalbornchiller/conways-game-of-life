@@ -3,7 +3,7 @@ const canvas = document.getElementById('c').getContext('2d')
 canvas.strokeStyle = '#e1e1e1'
 canvas.fillStyle = '#000'
 let cells = []
-let paused = false
+let paused = true
 const isFilled = (x, y) => cells[x] && cells[x][y]
 const liveCount = cells => cells.flat().filter(cell => cell === true).length
 const population = cells => cells.length < 10 ? liveCount(cells) : '~' + +(Math.ceil(liveCount(cells) / 50.0) * 50)
@@ -69,6 +69,10 @@ const playGod = e => {
     console.log('X: ' + xPosition + ', Y: ' + yPosition)
 }
 
+/**
+ * EVENT LISTENERS
+ */
+// Pause and play game
 $('#start').on('click', () => {
     if (paused) {
       paused = false
@@ -76,7 +80,11 @@ $('#start').on('click', () => {
     } else {
       paused = true
     }
-    // console.log(life.paused)
+})
+
+$('#reset').on('click', () => {
+    paused = true
+    init(64, 64, 1)
 })
 
 module.exports = {init}
