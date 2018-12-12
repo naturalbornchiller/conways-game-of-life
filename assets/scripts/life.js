@@ -16,11 +16,17 @@ const preconfigure = setting => {
     switch (setting) {
         case 1:
             config = configurations.spiralFlower
-            break;
-        // MAKE BLANK BOARD THE DEFAULT
-        default: // gosper glider gun
+            break
+        case 2:
+            config = configurations.spiralFlower2
+            break
+        case 3:
             config = configurations.glosperGlider
             break
+        case 4:
+            config = new Array(64).map(() => new Array(64).map(cell => Math.random > .5))
+        default: // gosper glider gun
+            
     }
 
     config.forEach(coord => cells[coord[0]][coord[1]] = true)
@@ -51,7 +57,7 @@ const init = (width=64, height=64, preset=0) => {
     for (let i = 0; i < width; i++) {
         cells[i] = []
         for (let j = 0; j < height; j++) {
-            cells[i][j] = preset ? false : Math.random() > .5
+            cells[i][j] = false
         }
     }
     if (preset) preconfigure(preset)
