@@ -1,6 +1,7 @@
 const configurations = require('./preconfigurations.js')
 let cells = []
 let paused = true
+const rng = () => Math.floor(Math.random()*4)
 const isFilled = (x, y) => cells[x] && cells[x][y]
 const liveCount = cells => cells.flat().filter(cell => cell === true).length
 const population = cells => cells.length < 10 ? liveCount(cells) : '~' + +(Math.ceil(liveCount(cells) / 50.0) * 50)
@@ -14,19 +15,16 @@ const countNeighbors = (x, y) => {
 const preconfigure = setting => {
     let config
     switch (setting) {
-        case 1:
-            config = configurations.spiralFlower
-            break
-        case 2:
-            config = configurations.spiralFlower2
-            break
-        case 3:
+        case 2: // glosper glider
             config = configurations.glosperGlider
             break
-        case 4:
-            config = new Array(64).map(() => new Array(64).map(cell => Math.random > .5))
-        default: // gosper glider gun
-            
+        case 3: // spiral flower
+            config = configurations.spiralFlower
+            break
+        case 4: // spiral flower 2
+            config = configurations.spiralFlower2
+            break
+        default:
     }
 
     config.forEach(coord => cells[coord[0]][coord[1]] = true)
@@ -53,14 +51,18 @@ const update = () => {
     draw()
 }
 
-const init = (width=64, height=64, preset=0) => {
+const init = (width=64, height=64, preset=rng()) => {
     for (let i = 0; i < width; i++) {
         cells[i] = []
         for (let j = 0; j < height; j++) {
-            cells[i][j] = false
+            if (preset === 0) {
+                cells[i][j] = false
+            } else if (preset === 1) {
+                cells[i][j] = Math.random() < .5
+            }
         }
     }
-    if (preset) preconfigure(preset)
+    if (preset > 1) preconfigure(preset)
     update()
 }
 
@@ -82,7 +84,7 @@ $('#start').on('click', () => {
 $('#reset').on('click', () => {
     paused = true
     $('#start').css({color: 'black'})
-    init(64, 64, 1)
+    init(64, 64, 0)
 })
 // Play god
 let isDown = false
