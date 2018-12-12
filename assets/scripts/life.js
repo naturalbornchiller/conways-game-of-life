@@ -26,14 +26,14 @@ const draw = (width=1512, height=512) => {
     let HTML = ''
     cells.forEach((row, x) => {
         row.forEach((cell, y) => {
-            cell ? HTML += `<div id=[${x}][${y}] class="cell alive"></div>` : HTML += `<div id=[${x}][${y}] class="cell dead"></div>`
+            cell ? HTML += `<div id="${x}-${y}" class="cell alive"></div>` : HTML += `<div id="${x}-${y}" class="cell dead"></div>`
         })
     })
+
     $('#frame').html(HTML)
 
     setTimeout(() => {
         $('#count').text(population(cells))
-        console.log(paused)
         if (!paused) update()
     }, 200)
 }
@@ -54,13 +54,6 @@ const init = (width=64, height=64, preset=0) => {
     update()
 }
 
-$('#container').on('hover', playGod)
-const playGod = e => {
-    const xPosition = e.clientX
-    const yPosition = e.clienY
-    console.log('X: ' + xPosition + ', Y: ' + yPosition)
-}
-
 /**
  * EVENT LISTENERS
  */
@@ -75,11 +68,19 @@ $('#start').on('click', () => {
       $('#start').css({color: 'black'})
     }
 })
-
+// Reset game
 $('#reset').on('click', () => {
     paused = true
     init(64, 64, 1)
 })
+// Play god
+$('#frame').on('click', '.cell', function (e) {
+    const coords = $(this).attr('id').split('-')
+    cells[parseInt(coords[0])][parseInt(coords[1])] = !cells[parseInt(coords[0])][parseInt(coords[1])]
+    console.log(coords + ' = ' + cells[parseInt(coords[0])][parseInt(coords[1])])
+    $(this).toggleClass('.dead')
+})
+
 
 module.exports = {init}
 

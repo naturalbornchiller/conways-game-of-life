@@ -1,7 +1,12 @@
 @import '~bootstrap/scss/bootstrap';
 $light_grey: rgba(225,225,225, .3);
 $black: rgba(0,0,0,1);
+$blue: rgba(0,0,255,1);
 
+#banner {
+    text-align: center;
+    margin: 30px;
+}
 #frame {
     height: 515px;
     width: 515px;
@@ -9,16 +14,24 @@ $black: rgba(0,0,0,1);
     border: 1px solid $black;
 }
 .cell {
+    cursor: pointer;
     float: left;
     background: $black;
     border: 1px solid $light_grey;
     width: 8px;
     height: 8px;
+    &:hover {
+        border: 1px solid $blue;
+    }
 }
 .dead {
     background: white;
 }
 
+#interface {
+    margin: 3px auto;
+    width: 35%;
+}
 #start, #reset{
     cursor: pointer;
     margin-left: 5px;
