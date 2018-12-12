@@ -50,8 +50,8 @@ const draw = (width=1512, height=512) => {
 
 const update = () => {
     cells = cells.map((row, x) => {
-        return cells[x] = row.map((cell, y) => {
-            return cells[x][y] = deadOrAlive(cell, countNeighbors(x, y))
+        return row.map((cell, y) => {
+            return deadOrAlive(cell, countNeighbors(x, y))
         })
     })
     draw()
