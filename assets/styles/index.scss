@@ -1,15 +1,17 @@
 @import '~bootstrap/scss/bootstrap';
+$light_grey: rgba(225,225,225, .3);
+$black: rgba(0,0,0,1);
 
 #frame {
     height: 515px;
     width: 515px;
     margin: 0 auto;
-    border: 1px solid black;
+    border: 1px solid $black;
 }
 .cell {
     float: left;
-    background: black;
-    // border: 1px solid #e1e1e1;
+    background: $black;
+    border: 1px solid $light_grey;
     width: 8px;
     height: 8px;
 }

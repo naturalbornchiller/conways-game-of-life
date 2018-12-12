@@ -82,3 +82,6 @@ $('#reset').on('click', () => {
 })
 
 module.exports = {init}
+
+
+// stretch goals: implement color logic! 
