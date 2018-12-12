@@ -84,6 +84,11 @@ $('#frame').on('mouseover', '.cell', function (e) {
         console.log(coords + ' = ' + cells[parseInt(coords[0])][parseInt(coords[1])])
         $(this).toggleClass('dead')
     }
+}).on('click', '.cell', function (e) {
+    const coords = $(this).attr('id').split('-')
+    cells[parseInt(coords[0])][parseInt(coords[1])] = !cells[parseInt(coords[0])][parseInt(coords[1])]
+    console.log(coords + ' = ' + cells[parseInt(coords[0])][parseInt(coords[1])])
+    $(this).toggleClass('dead')
 })
 
 
