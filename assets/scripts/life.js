@@ -41,8 +41,8 @@ const draw = (width=1512, height=512) => {
     })
     setTimeout(() => {
         $('#count').text(population(cells))
-        // if (!paused) 
-        update()
+        console.log(paused)
+        if (!paused) update()
     }, 200)
 }
 
@@ -69,4 +69,14 @@ const playGod = e => {
     console.log('X: ' + xPosition + ', Y: ' + yPosition)
 }
 
-module.exports = init
+$('#start').on('click', () => {
+    if (paused) {
+      paused = false
+      update()
+    } else {
+      paused = true
+    }
+    // console.log(life.paused)
+})
+
+module.exports = {init}
