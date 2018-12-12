@@ -14,6 +14,7 @@ const countNeighbors = (x, y) => {
 const preconfigure = setting => {
     let config
     switch (setting) {
+        // MAKE BLANK BOARD THE DEFAULT
         default: // gosper glider gun
             config = configurations.glosperGlider
             break
@@ -74,11 +75,15 @@ $('#reset').on('click', () => {
     init(64, 64, 1)
 })
 // Play god
-$('#frame').on('click', '.cell', function (e) {
-    const coords = $(this).attr('id').split('-')
-    cells[parseInt(coords[0])][parseInt(coords[1])] = !cells[parseInt(coords[0])][parseInt(coords[1])]
-    console.log(coords + ' = ' + cells[parseInt(coords[0])][parseInt(coords[1])])
-    $(this).toggleClass('dead')
+let isDown = false
+$(document).mousedown(() => isDown = true).mouseup(() => isDown = false)
+$('#frame').on('mouseover', '.cell', function (e) {
+    if (isDown) {
+        const coords = $(this).attr('id').split('-')
+        cells[parseInt(coords[0])][parseInt(coords[1])] = !cells[parseInt(coords[0])][parseInt(coords[1])]
+        console.log(coords + ' = ' + cells[parseInt(coords[0])][parseInt(coords[1])])
+        $(this).toggleClass('dead')
+    }
 })
 
 
