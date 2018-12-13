@@ -63,7 +63,6 @@ $blue: rgba(0,0,255,1);
     margin-right: 5px;
     margin-bottom: 7px;
   }
-
   #tooltip #tooltiptext {
     visibility: hidden;
     width: 150px;
@@ -78,13 +77,12 @@ $blue: rgba(0,0,255,1);
     left: 50%;
     margin-left: -60px;
   }
-  
   #tooltip #tooltiptext::after {
     content: "";
     position: absolute;
     bottom: 100%;
     left: 50%;
-    margin-left: -5px;
+    margin-left: -19.5px;
     border-width: 5px;
     border-style: solid;
     border-color: transparent transparent black transparent;

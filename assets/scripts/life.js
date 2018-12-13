@@ -2,6 +2,7 @@ const configurations = require('./preconfigurations.js')
 let cells = []
 let width = 64
 let height = 64
+let tick =100
 let paused = true
 let preset = 1
 let generation = 0
@@ -53,7 +54,7 @@ const draw = () => {
             update()
             generation++
         }
-    }, 200)
+    }, tick)
 }
 
 const update = () => {
