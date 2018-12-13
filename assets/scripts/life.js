@@ -60,10 +60,10 @@ const init = (width=64, height=64) => {
     for (let i = 0; i < width; i++) {
         cells[i] = []
         for (let j = 0; j < height; j++) {
-            if (preset === 0) {
-                cells[i][j] = false
-            } else if (preset === 1) {
+            if (preset === 1) {
                 cells[i][j] = Math.random() < .5
+            } else {
+                cells[i][j] = false
             }
         }
     }
@@ -112,6 +112,7 @@ $('#frame').on('mouseover', '.cell', function (e) {
 $('select').on('change', function () {
     $('option:selected').each(function () {
         preset = parseInt($(this).attr('data-option'))
+        $('#reset').trigger('click')
     })
 })
 
