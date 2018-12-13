@@ -1,10 +1,11 @@
 const configurations = require('./preconfigurations.js')
 let cells = []
 let paused = true
+let generation = -1
 const rng = () => Math.floor(Math.random()*4)
 const isFilled = (x, y) => cells[x] && cells[x][y]
 const liveCount = cells => cells.flat().filter(cell => cell === true).length
-const population = cells => cells.length < 10 ? liveCount(cells) : '~' + +(Math.ceil(liveCount(cells) / 50.0) * 50)
+const population = cells => liveCount(cells) > 10 ? '~' + +(Math.ceil(liveCount(cells) / 10.0) * 10) : liveCount(cells)
 const deadOrAlive = (cell, count) => cell ? (count === 2 || count === 3) : count === 3
 const countNeighbors = (x, y) => {
     const neighbors = [isFilled(x-1, y-1), isFilled(x-1, y), isFilled(x-1, y+1), isFilled(x, y-1), 
@@ -41,7 +42,9 @@ const draw = (width=1512, height=512) => {
     $('#frame').html(HTML)
 
     setTimeout(() => {
+        generation++
         $('#count').text(population(cells))
+        $('#generation').text(generation)
         if (!paused) update()
     }, 200)
 }
@@ -51,7 +54,7 @@ const update = () => {
     draw()
 }
 
-const init = (width=64, height=64, preset=rng()) => {
+const init = (width=64, height=64, preset=0) => {
     for (let i = 0; i < width; i++) {
         cells[i] = []
         for (let j = 0; j < height; j++) {
@@ -82,6 +85,7 @@ $('#start').on('click', () => {
 })
 // Reset game
 $('#reset').on('click', () => {
+    generation = -1
     paused = true
     $('#start').css({color: 'black'})
     init(64, 64, 0)

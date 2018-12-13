@@ -16,9 +16,15 @@
       <h1 id="banner">Emmanuel's Game of Life</h1>
       <div id="frame"></div>
       <div id="interface">
-          <i class="fa fa-play" id="start" aria-hidden="true"></i>
-          <i class="fas fa-undo" id="reset"></i>
-          <i class="fas fa-info-circle" id="tooltip"><p id="tooltiptext">population: <span id="count"></span></p></i>
+          <i class="fa fa-play" id="start" title="pause/play" aria-hidden="true"></i>
+          <i class="fas fa-undo" id="reset" title="reset"></i>
+          <i class="fas fa-info-circle" id="tooltip">
+            <p id="tooltiptext">
+              population: <span id="count"></span>
+              <br>
+              generation: <span id="generation"></span>
+            </p>
+          </i>
       </div>
     </body>
 </html>
