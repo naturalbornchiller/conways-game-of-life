@@ -33,27 +33,31 @@ $blue: rgba(0,0,255,1);
 }
 
 #interface {
-    margin: 3px auto;
-    // sm grid
-    // width: 35%;
-    // lg grid
-    width: 70%;
+    justify-content: flex-start;
+    padding-top: 3px;
+    margin: 6px 219px; // lg grid
+    width: 35%;
 }
-#start, #reset, #rewind, #fastforward{
+#reset, #presets {
     cursor: pointer;
-    margin-left: 5px;
+    margin-left: 12px;
 }
-#rewind {
-    margin-right: 2px;
+#start {
+    margin: 6px 4px;
+    margin-left: 7px;
 }
-
-#reset{
-    margin-right: 5px;
+#rewind, #fastforward, #landscape, #start {
+    cursor: pointer;
 }
 #presets {
     &:focus {
         outline: none
     }
+}
+
+#landscape {
+    margin-top: -5px;
+    margin-left: 5px;
 }
 
 
@@ -62,6 +66,7 @@ $blue: rgba(0,0,255,1);
 #tooltip {
     position: relative;
     display: inline-block;
+    margin-left: 12px;
     margin-right: 5px;
     margin-bottom: 7px;
   }
