@@ -39,6 +39,16 @@ const configurations = {
 
 module.exports = configurations
 
+
+// 36,32 = false
+// 14:34:06.426 life.js:113 36,31 = false
+// 14:34:08.134 life.js:113 29,27 = false
+// 14:34:08.967 life.js:113 28,27 = false
+// 14:34:10.270 life.js:113 24,35 = false
+// 14:34:11.010 life.js:113 24,34 = false
+// 14:34:12.726 life.js:113 32,39 = false
+// 14:34:13.568 life.js:113 31,39 = false
+
 /*
 IDEAS:
 MAKE GRID WRAPAROUND
