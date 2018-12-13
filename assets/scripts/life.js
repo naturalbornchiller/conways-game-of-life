@@ -2,7 +2,7 @@ const configurations = require('./preconfigurations.js')
 let cells = []
 let width = 64
 let height = 64
-let tick =100
+let tick = 200
 let paused = true
 let preset = 1
 let generation = 0
@@ -89,6 +89,20 @@ $('#start').on('click', () => {
     } else {
       paused = true
       $('#start').css({color: 'black'})
+    }
+})
+// Rewind
+$('#rewind').on('click', function () {
+    
+})
+// Fast forward
+$('#fastforward').on('click', (e) => {
+    if (tick > 100) {
+        tick /= 3
+        $(event.target).css({color: '#4AC948'})
+    } else {
+        tick *= 3
+        $(event.target).css({color: 'black'})
     }
 })
 // Reset game

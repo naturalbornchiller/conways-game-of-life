@@ -39,13 +39,15 @@ $blue: rgba(0,0,255,1);
     // lg grid
     width: 70%;
 }
-#start, #reset{
+#start, #reset, #rewind, #fastforward{
     cursor: pointer;
     margin-left: 5px;
 }
+#rewind {
+    margin-right: 2px;
+}
 
 #reset{
-    cursor: pointer;
     margin-right: 5px;
 }
 #presets {
