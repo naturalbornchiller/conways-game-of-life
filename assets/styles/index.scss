@@ -11,15 +11,15 @@ $blue: rgba(0,0,255,1);
     display: flex;
     flex-flow: row wrap;
     flex: 1 1 auto;
+    // height: 514; 
+    // width: 514;
     height: 514px;
-    width: 514px;
+    width: 1026px;
     margin: 0 auto;
     border: 1px solid black;
 }
 .cell {
     cursor: pointer;
-    // float: left;
-
     background: $cadet;
     border: 1px solid $light_grey;
     width: 8px;

@@ -1,5 +1,7 @@
 const configurations = require('./preconfigurations.js')
 let cells = []
+let width = 64
+let height = 64
 let paused = true
 let preset = 1
 let generation = 0
@@ -25,7 +27,7 @@ const preconfigure = setting => {
         case 4: // spiral flower 2
             config = configurations.spiralFlower2
             break
-        case 5: // spiral flower 2
+        case 5: // spiral flower 3
             config = configurations.spiralFlower3
             break
         default:
@@ -59,10 +61,10 @@ const update = () => {
     draw()
 }
 
-const init = (width=64, height=64) => {
-    for (let i = 0; i < width; i++) {
+const init = (width=128, height=64) => {
+    for (let i = 0; i < height; i++) {
         cells[i] = []
-        for (let j = 0; j < height; j++) {
+        for (let j = 0; j < width; j++) {
             if (preset === 1) {
                 cells[i][j] = Math.random() < .5
             } else {
@@ -93,7 +95,7 @@ $('#reset').on('click', () => {
     generation = 0
     paused = true
     $('#start').css({color: 'black'})
-    init(64, 64, 0)
+    init()
 })
 // Play god
 let isDown = false
