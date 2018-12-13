@@ -1,9 +1,10 @@
 const configurations = require('./preconfigurations.js')
 let cells = []
-let width = 64
+let length = 64 // 64 for sm
 let height = 64
 let tick = 200
 let paused = true
+let enlarged = false
 let preset = 1
 let generation = 0
 const isFilled = (x, y) => cells[x] && cells[x][y]
@@ -62,10 +63,10 @@ const update = () => {
     draw()
 }
 
-const init = (width=128, height=64) => {
+const init = () => {
     for (let i = 0; i < height; i++) {
         cells[i] = []
-        for (let j = 0; j < width; j++) {
+        for (let j = 0; j < length; j++) {
             if (preset === 1) {
                 cells[i][j] = Math.random() < .5
             } else {
@@ -93,7 +94,7 @@ $('#start').on('click', () => {
 })
 // Rewind
 $('#rewind').on('click', function () {
-    
+
 })
 // Fast forward
 $('#fastforward').on('click', (e) => {
@@ -110,6 +111,25 @@ $('#reset').on('click', () => {
     generation = 0
     paused = true
     $('#start').css({color: 'black'})
+    init()
+})
+// Landscape
+$('#landscape').on('mousedown', function () {
+    if (enlarged) {
+        $('#super').animate({width: '516px'}, 2000)
+        $('#frame').animate({width: '514px'}, 1900)
+        $('#interface').animate({left: 480}, 2000)
+        $(this).css({color: '#7e39b8'})
+        length = 64
+        enlarged = false
+    } else {
+        $('#super').animate({width: '1028px'}, 1900)
+        $('#frame').animate({width: '1026px'}, 2000)
+        $('#interface').animate({left: 220}, 2000)
+        $(this).css({color: 'black'})
+        length = 128
+        enlarged = true
+    }
     init()
 })
 // Play god

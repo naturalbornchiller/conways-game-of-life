@@ -49,6 +49,8 @@ module.exports = configurations
 // 14:34:12.726 life.js:113 32,39 = false
 // 14:34:13.568 life.js:113 31,39 = false
 
+//SQL lite
+
 /*
 IDEAS:
 MAKE GRID WRAPAROUND
