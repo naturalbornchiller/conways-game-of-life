@@ -25,6 +25,9 @@ const preconfigure = setting => {
         case 4: // spiral flower 2
             config = configurations.spiralFlower2
             break
+        case 5: // spiral flower 2
+            config = configurations.spiralFlower3
+            break
         default:
     }
 
