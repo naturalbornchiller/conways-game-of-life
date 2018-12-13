@@ -1,7 +1,7 @@
 const configurations = require('./preconfigurations.js')
 let cells = []
 let paused = true
-let generation = -1
+let generation = 0
 const rng = () => Math.floor(Math.random()*4)
 const isFilled = (x, y) => cells[x] && cells[x][y]
 const liveCount = cells => cells.flat().filter(cell => cell === true).length
@@ -42,10 +42,12 @@ const draw = (width=1512, height=512) => {
     $('#frame').html(HTML)
 
     setTimeout(() => {
-        generation++
         $('#count').text(population(cells))
         $('#generation').text(generation)
-        if (!paused) update()
+        if (!paused) {
+            update()
+            generation++
+        }
     }, 200)
 }
 
@@ -85,7 +87,7 @@ $('#start').on('click', () => {
 })
 // Reset game
 $('#reset').on('click', () => {
-    generation = -1
+    generation = 0
     paused = true
     $('#start').css({color: 'black'})
     init(64, 64, 0)
