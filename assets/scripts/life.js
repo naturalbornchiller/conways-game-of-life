@@ -1,8 +1,8 @@
 const configurations = require('./preconfigurations.js')
 let cells = []
 let paused = true
+let preset = 1
 let generation = 0
-const rng = () => Math.floor(Math.random()*4)
 const isFilled = (x, y) => cells[x] && cells[x][y]
 const liveCount = cells => cells.flat().filter(cell => cell === true).length
 const population = cells => liveCount(cells) > 10 ? '~' + +(Math.ceil(liveCount(cells) / 10.0) * 10) : liveCount(cells)
@@ -17,7 +17,7 @@ const preconfigure = setting => {
     let config
     switch (setting) {
         case 2: // glosper glider
-            config = configurations.glosperGlider
+            config = configurations.gosperGlider
             break
         case 3: // spiral flower
             config = configurations.spiralFlower
@@ -31,7 +31,7 @@ const preconfigure = setting => {
     config.forEach(coord => cells[coord[0]][coord[1]] = true)
 }
 
-const draw = (width=1512, height=512) => {
+const draw = () => {
     let HTML = ''
     cells.forEach((row, x) => {
         row.forEach((cell, y) => {
@@ -56,7 +56,7 @@ const update = () => {
     draw()
 }
 
-const init = (width=64, height=64, preset=0) => {
+const init = (width=64, height=64) => {
     for (let i = 0; i < width; i++) {
         cells[i] = []
         for (let j = 0; j < height; j++) {
@@ -108,7 +108,12 @@ $('#frame').on('mouseover', '.cell', function (e) {
     console.log(coords + ' = ' + cells[parseInt(coords[0])][parseInt(coords[1])])
     $(this).toggleClass('dead')
 })
-
+// Presets
+$('select').on('change', function () {
+    $('option:selected').each(function () {
+        preset = parseInt($(this).attr('data-option'))
+    })
+})
 
 module.exports = {init}
 

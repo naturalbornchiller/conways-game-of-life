@@ -1,6 +1,6 @@
 @import '~bootstrap/scss/bootstrap';
 $light_grey: rgba(225,225,225, .3);
-$black: rgba(0,0,0,1);
+$cadet: rgb(76, 146, 148);
 $blue: rgba(0,0,255,1);
 
 #banner {
@@ -8,15 +8,19 @@ $blue: rgba(0,0,255,1);
     margin: 30px;
 }
 #frame {
-    height: 515px;
-    width: 515px;
+    display: flex;
+    flex-flow: row wrap;
+    flex: 1 1 auto;
+    height: 514px;
+    width: 514px;
     margin: 0 auto;
-    border: 1px solid $black;
+    border: 1px solid black;
 }
 .cell {
     cursor: pointer;
-    float: left;
-    background: $black;
+    // float: left;
+
+    background: $cadet;
     border: 1px solid $light_grey;
     width: 8px;
     height: 8px;
@@ -40,6 +44,11 @@ $blue: rgba(0,0,255,1);
 #reset{
     cursor: pointer;
     margin-right: 5px;
+}
+#presets {
+    &:focus {
+        outline: none
+    }
 }
 
 
