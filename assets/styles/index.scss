@@ -39,6 +39,7 @@ $blue: rgba(0,0,255,1);
 /*INTERFACE*/
 #interface {
     position: absolute;
+    margin-top: 3px;
     left: 480px; // to 220
     height: 34px;
     width: 35%;
@@ -58,13 +59,15 @@ $blue: rgba(0,0,255,1);
     margin-left: 6.5px;
 }
 #presets {
+    width: 125px;
     &:focus {
         outline: none
     }
 }
 #landscape {
-    margin-left: 5px;
     font-size: 25px;
+    position: absolute;
+    right: 25px;
 }
 
 /*TOOLTIP*/

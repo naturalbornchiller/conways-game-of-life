@@ -94,10 +94,9 @@ $('#start').on('click', () => {
 })
 // Rewind
 $('#rewind').on('click', function () {
-
 })
 // Fast forward
-$('#fastforward').on('click', (e) => {
+$('#fastforward').on('click', () => {
     if (tick > 100) {
         tick /= 3
         $(event.target).css({color: '#4AC948'})
@@ -113,19 +112,24 @@ $('#reset').on('click', () => {
     $('#start').css({color: 'black'})
     init()
 })
+// Choose color
+$('#color-picker').on('change', function () {
+    const backgroundColor = $(this).val()
+    $('.cell').not('.dead').css({backgroundColor})
+})
 // Landscape
 $('#landscape').on('mousedown', function () {
     if (enlarged) {
         $('#super').animate({width: '516px'}, 2000)
         $('#frame').animate({width: '514px'}, 1900)
-        $('#interface').animate({left: 480}, 2000)
+        $('#interface').animate({left: 480, width: '35%'}, 2000)
         $(this).css({color: 'black'})
         length = 64
         enlarged = false
     } else {
         $('#super').animate({width: '1028px'}, 2000)
         $('#frame').animate({width: '1026px'}, 2000)
-        $('#interface').animate({left: 220}, 2000)
+        $('#interface').animate({left: 220, width: '71%'}, 2000)
         $(this).css({color: '#7e39b8'})
         length = 128
         enlarged = true
@@ -138,14 +142,14 @@ $(document).mousedown(() => isDown = true).mouseup(() => isDown = false)
 $('#frame').on('mouseover', '.cell', function (e) {
     if (isDown) {
         const coords = $(this).attr('id').split('-')
-        cells[parseInt(coords[0])][parseInt(coords[1])] = !cells[parseInt(coords[0])][parseInt(coords[1])]
-        console.log(coords + ' = ' + cells[parseInt(coords[0])][parseInt(coords[1])])
+        cells[+coords[0]][+coords[1]] = !cells[+coords[0]][+coords[1]]
+        console.log(coords + ' = ' + cells[+coords[0]][+coords[1]])
         $(this).toggleClass('dead')
     }
 }).on('click', '.cell', function (e) {
     const coords = $(this).attr('id').split('-')
-    cells[parseInt(coords[0])][parseInt(coords[1])] = !cells[parseInt(coords[0])][parseInt(coords[1])]
-    console.log(coords + ' = ' + cells[parseInt(coords[0])][parseInt(coords[1])])
+    cells[+coords[0]][+coords[1]] = !cells[+coords[0]][+coords[1]]
+    console.log(coords + ' = ' + cells[+coords[0]][+coords[1]])
     $(this).toggleClass('dead')
 })
 // Presets
