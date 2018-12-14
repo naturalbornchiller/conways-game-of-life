@@ -119,14 +119,14 @@ $('#landscape').on('mousedown', function () {
         $('#super').animate({width: '516px'}, 2000)
         $('#frame').animate({width: '514px'}, 1900)
         $('#interface').animate({left: 480}, 2000)
-        $(this).css({color: '#7e39b8'})
+        $(this).css({color: 'black'})
         length = 64
         enlarged = false
     } else {
-        $('#super').animate({width: '1028px'}, 1900)
+        $('#super').animate({width: '1028px'}, 2000)
         $('#frame').animate({width: '1026px'}, 2000)
         $('#interface').animate({left: 220}, 2000)
-        $(this).css({color: 'black'})
+        $(this).css({color: '#7e39b8'})
         length = 128
         enlarged = true
     }
