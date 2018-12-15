@@ -3,7 +3,7 @@ let cells = []
 let length = 64 // 64 for sm
 let height = 64
 let tick = 200
-let cellColor = ''
+let backgroundColor
 let paused = true
 let enlarged = false
 let preset = 1
@@ -47,9 +47,8 @@ const draw = () => {
         })
     })
 
-    $('cell.alive').css({background: cellColor}) // set color with color picker
     $('#frame').html(HTML) // display new gridstate
-
+    console.log($('#color-picker').val())
     setTimeout(() => {
         displayInfo()
         if (!paused) {
@@ -139,8 +138,11 @@ $('#landscape').on('mousedown', function () {
 })
 // Choose color
 $('#color-picker').on('change', function () {
-    console.log($(this).val())
-    cellColor = $(this).val().toString()
+    backgroundColor = $(this).val()
+    draw()
+})
+$('#frame').on('DOMNodeInserted', 'div.cell.alive', () => {
+    $('div.cell.alive').css('background', backgroundColor)
 })
 // Play god
 let isDown = false
