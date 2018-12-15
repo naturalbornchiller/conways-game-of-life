@@ -3,6 +3,7 @@ let cells = []
 let length = 64 // 64 for sm
 let height = 64
 let tick = 200
+let cellColor = ''
 let paused = true
 let enlarged = false
 let preset = 1
@@ -42,15 +43,15 @@ const draw = () => {
     let HTML = ''
     cells.forEach((row, x) => {
         row.forEach((cell, y) => {
-            cell ? HTML += `<div id="${x}-${y}" class="cell alive"></div>` : HTML += `<div id="${x}-${y}" class="cell dead"></div>`
+            cell ? HTML += `<div id="${x}-${y}" class="cell alive"></div>` : HTML += `<div id="${x}-${y}" class="cell"></div>`
         })
     })
 
-    $('#frame').html(HTML)
+    $('cell.alive').css({background: cellColor}) // set color with color picker
+    $('#frame').html(HTML) // display new gridstate
 
     setTimeout(() => {
-        $('#count').text(population(cells))
-        $('#generation').text(generation)
+        displayInfo()
         if (!paused) {
             update()
             generation++
@@ -61,6 +62,11 @@ const draw = () => {
 const update = () => {
     cells = cells.map((row, x) => row.map((cell, y) => deadOrAlive(cell, countNeighbors(x, y))))
     draw()
+}
+
+const displayInfo = () => {
+    $('#count').text(population(cells))
+        $('#generation').text(generation)
 }
 
 const init = () => {
@@ -112,11 +118,6 @@ $('#reset').on('click', () => {
     $('#start').css({color: 'black'})
     init()
 })
-// Choose color
-$('#color-picker').on('change', function () {
-    const backgroundColor = $(this).val()
-    $('.cell').not('.dead').css({backgroundColor})
-})
 // Landscape
 $('#landscape').on('mousedown', function () {
     if (enlarged) {
@@ -136,21 +137,28 @@ $('#landscape').on('mousedown', function () {
     }
     init()
 })
+// Choose color
+$('#color-picker').on('change', function () {
+    console.log($(this).val())
+    cellColor = $(this).val().toString()
+})
 // Play god
 let isDown = false
 $(document).mousedown(() => isDown = true).mouseup(() => isDown = false)
 $('#frame').on('mouseover', '.cell', function (e) {
+    displayInfo()
     if (isDown) {
         const coords = $(this).attr('id').split('-')
         cells[+coords[0]][+coords[1]] = !cells[+coords[0]][+coords[1]]
         console.log(coords + ' = ' + cells[+coords[0]][+coords[1]])
-        $(this).toggleClass('dead')
+        $(this).toggleClass('alive')
     }
 }).on('click', '.cell', function (e) {
+    displayInfo()
     const coords = $(this).attr('id').split('-')
     cells[+coords[0]][+coords[1]] = !cells[+coords[0]][+coords[1]]
     console.log(coords + ' = ' + cells[+coords[0]][+coords[1]])
-    $(this).toggleClass('dead')
+    $(this).toggleClass('alive')
 })
 // Presets
 $('select').on('change', function () {

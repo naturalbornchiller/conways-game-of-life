@@ -1,6 +1,6 @@
 @import '~bootstrap/scss/bootstrap';
 $light_grey: rgba(225,225,225, .3);
-$cadet: rgb(76, 146, 148);
+$cadet: #5f9ea0;
 $blue: rgba(0,0,255,1);
 
 /*HEADER*/
@@ -24,7 +24,7 @@ $blue: rgba(0,0,255,1);
 /*CELLS*/
 .cell {
     cursor: pointer;
-    background: $cadet;
+    background: white;
     border: 1px solid $light_grey;
     width: 8px;
     height: 8px;
@@ -32,8 +32,8 @@ $blue: rgba(0,0,255,1);
         border: 1px solid $blue;
     }
 }
-.dead {
-    background: white;
+.alive {
+    background: $cadet;
 }
 
 /*INTERFACE*/
