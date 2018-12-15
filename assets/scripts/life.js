@@ -48,7 +48,6 @@ const draw = () => {
     })
 
     $('#frame').html(HTML) // display new gridstate
-    console.log($('#color-picker').val())
     setTimeout(() => {
         displayInfo()
         if (!paused) {
@@ -154,6 +153,7 @@ $('#frame').on('mouseover', '.cell', function (e) {
         cells[+coords[0]][+coords[1]] = !cells[+coords[0]][+coords[1]]
         console.log(coords + ' = ' + cells[+coords[0]][+coords[1]])
         $(this).toggleClass('alive')
+        $('div.cell.alive').css('background', backgroundColor)
     }
 }).on('click', '.cell', function (e) {
     displayInfo()
@@ -161,6 +161,7 @@ $('#frame').on('mouseover', '.cell', function (e) {
     cells[+coords[0]][+coords[1]] = !cells[+coords[0]][+coords[1]]
     console.log(coords + ' = ' + cells[+coords[0]][+coords[1]])
     $(this).toggleClass('alive')
+    $('div.cell.alive').css('background', backgroundColor)
 })
 // Presets
 $('select').on('change', function () {
