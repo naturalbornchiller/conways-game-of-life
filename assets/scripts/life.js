@@ -2,8 +2,10 @@ const configurations = require('./preconfigurations.js')
 let cells = []
 let length = 64 // 64 for sm
 let height = 64
-let tick = 200
-let backgroundColor
+// let backgroundColor
+let tick = 80
+let dense = false
+let paintMode = false
 let paused = true
 let enlarged = false
 let preset = 1
@@ -101,7 +103,7 @@ $('#rewind').on('click', function () {
 })
 // Fast forward
 $('#fastforward').on('click', () => {
-    if (tick > 100) {
+    if (tick >= 80) {
         tick /= 3
         $(event.target).css({color: '#4AC948'})
     } else {
@@ -117,13 +119,14 @@ $('#reset').on('click', () => {
     init()
 })
 // Landscape
-$('#landscape').on('mousedown', function () {
+$('#landscape').on('click', function () {
     if (enlarged) {
         $('#super').animate({width: '516px'}, 2000)
-        $('#frame').animate({width: '514px'}, 1900)
+        $('#frame').animate({width: '514px'}, 1800)
         $('#interface').animate({left: 480, width: '35%'}, 2000)
         $(this).css({color: 'black'})
         length = 64
+        tick /= 2
         enlarged = false
     } else {
         $('#super').animate({width: '1028px'}, 2000)
@@ -131,17 +134,10 @@ $('#landscape').on('mousedown', function () {
         $('#interface').animate({left: 220, width: '71%'}, 2000)
         $(this).css({color: '#7e39b8'})
         length = 128
+        tick *=2
         enlarged = true
     }
     init()
-})
-// Choose color
-$('#color-picker').on('change', function () {
-    backgroundColor = $(this).val()
-    draw()
-})
-$('#frame').on('DOMNodeInserted', 'div.cell.alive', () => {
-    $('div.cell.alive').css('background', backgroundColor)
 })
 // Play god
 let isDown = false
@@ -153,7 +149,7 @@ $('#frame').on('mouseover', '.cell', function (e) {
         cells[+coords[0]][+coords[1]] = !cells[+coords[0]][+coords[1]]
         console.log(coords + ' = ' + cells[+coords[0]][+coords[1]])
         $(this).toggleClass('alive')
-        $('div.cell.alive').css('background', backgroundColor)
+        // $('div.cell.alive').css('background', backgroundColor)
     }
 }).on('click', '.cell', function (e) {
     displayInfo()
@@ -161,7 +157,17 @@ $('#frame').on('mouseover', '.cell', function (e) {
     cells[+coords[0]][+coords[1]] = !cells[+coords[0]][+coords[1]]
     console.log(coords + ' = ' + cells[+coords[0]][+coords[1]])
     $(this).toggleClass('alive')
-    $('div.cell.alive').css('background', backgroundColor)
+    // $('div.cell.alive').css('background', backgroundColor)
+})
+// Paint brush
+$('#paintbrush').on('click', function () {
+    if (paintMode) {
+        $(this).css({color: 'black'})
+        paintMode = false
+    } else {
+        $(this).css({color: '#b913aa'})
+        paintMode = true
+    }
 })
 // Presets
 $('select').on('change', function () {
@@ -171,7 +177,14 @@ $('select').on('change', function () {
     })
 })
 
+
 module.exports = {init}
 
-
-// stretch goals: implement color logic! 
+// Choose color - DEPRECATED; CAUSES MASSIVE LAG
+// $('#color-picker').on('change', function () {
+//     backgroundColor = $(this).val()
+//     draw()
+// })
+// $('#frame').on('DOMNodeInserted', 'div.cell.alive', () => {
+//     $('div.cell.alive').css('background', backgroundColor)
+// })

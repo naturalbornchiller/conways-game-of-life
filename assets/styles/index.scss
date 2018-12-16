@@ -36,6 +36,17 @@ $blue: rgba(0,0,255,1);
     background-color: $cadet;
 }
 
+.cell-sm {
+    cursor: pointer;
+    background: white;
+    border: 1px solid $light_grey;
+    width: 8px;
+    height: 8px;
+    &:hover {
+        border: 1px solid $blue;
+    }
+}
+
 /*INTERFACE*/
 #interface {
     position: absolute;
@@ -44,10 +55,7 @@ $blue: rgba(0,0,255,1);
     height: 34px;
     width: 35%;
 }
-#reset, #presets, #fastforward, #landscape, #start, #tooltip {
-    // margin-top: 4px;
-}
-#rewind, #fastforward, #landscape, #start {
+#rewind, #fastforward, #landscape, #start, #paintbrush {
     cursor: pointer;
 }
 #reset, #presets {
@@ -68,6 +76,9 @@ $blue: rgba(0,0,255,1);
     font-size: 25px;
     position: absolute;
     right: 25px;
+}
+#paintbrush {
+    margin-left: 5px;
 }
 
 /*TOOLTIP*/
