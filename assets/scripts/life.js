@@ -126,7 +126,7 @@ $('#landscape').on('click', function () {
         $('#interface').animate({left: 480, width: '35%'}, 2000)
         $(this).css({color: 'black'})
         length = 64
-        tick /= 2
+        tick /= (3/2)
         enlarged = false
     } else {
         $('#super').animate({width: '1028px'}, 2000)
@@ -134,7 +134,7 @@ $('#landscape').on('click', function () {
         $('#interface').animate({left: 220, width: '71%'}, 2000)
         $(this).css({color: '#7e39b8'})
         length = 128
-        tick *=2
+        tick *= (3/2)
         enlarged = true
     }
     init()
