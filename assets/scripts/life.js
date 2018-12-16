@@ -1,11 +1,11 @@
 const configurations = require('./preconfigurations.js')
 let cells = []
-let length = 64 // 64 for sm
+let length = 64
 let height = 64
 // let backgroundColor
 let tick = 80
-let dense = false
-let paintMode = false
+let dense = false // onTrue: { length: 256, with 128 } or {both: 128} 
+let mirror = false
 let paused = true
 let enlarged = false
 let preset = 1
@@ -15,8 +15,15 @@ const liveCount = cells => cells.flat().filter(cell => cell === true).length
 const population = cells => liveCount(cells) > 10 ? '~' + +(Math.ceil(liveCount(cells) / 10.0) * 10) : liveCount(cells)
 const deadOrAlive = (cell, count) => cell ? (count === 2 || count === 3) : count === 3
 const countNeighbors = (x, y) => {
-    const neighbors = [isFilled(x-1, y-1), isFilled(x-1, y), isFilled(x-1, y+1), isFilled(x, y-1), 
-                       isFilled(x, y+1), isFilled(x+1, y-1), isFilled(x+1, y), isFilled(x+1, y+1)]
+    let neighbors = []
+    for (let i = -1; i <= 1; i++) {
+        for (let j = -1; j <= 1; j++) {
+            if (i === 0 && j === 0) {
+                continue
+            }
+            neighbors.push(isFilled((x + i + length) % length, (y + j + height) % height))
+        }
+    }
     return liveCount(neighbors)
 }
 
@@ -161,12 +168,12 @@ $('#frame').on('mouseover', '.cell', function (e) {
 })
 // Paint brush
 $('#paintbrush').on('click', function () {
-    if (paintMode) {
+    if (mirror) {
         $(this).css({color: 'black'})
-        paintMode = false
+        mirror = false
     } else {
         $(this).css({color: '#b913aa'})
-        paintMode = true
+        mirror = true
     }
 })
 // Presets
